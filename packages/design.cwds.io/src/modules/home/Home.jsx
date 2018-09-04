@@ -43,6 +43,17 @@ export default () => (
         <div className="w-100 d-none d-sm-block d-md-none mb-3" />
         <Card>
           <Card.Header>
+            <Card.Title>Patterns</Card.Title>
+          </Card.Header>
+          <Card.Body>Cool Stuff</Card.Body>
+          <Card.Footer>
+            <Link to="/patterns">
+              <Button color="primary">Go!</Button>
+            </Link>
+          </Card.Footer>
+        </Card>
+        <Card>
+          <Card.Header>
             <Card.Title>Core</Card.Title>
           </Card.Header>
           <Card.Body>asdflkjasdlkfjasdlfkj</Card.Body>

@@ -10,6 +10,7 @@ import CorePage from './modules/core-styles';
 import PrinciplesPage from './modules/design-principles';
 import LabsPage from './modules/labs';
 import ComponentBrowser from './modules/component-browser';
+import Patterns from './modules/patterns';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/principles" component={PrinciplesPage} />
             <Route path="/labs" component={LabsPage} />
             <Route path="/components" component={ComponentBrowser} />
+            <Route path="/patterns" component={Patterns} />
           </div>
         </ScrollToTop>
       </Router>
