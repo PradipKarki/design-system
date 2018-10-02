@@ -5,7 +5,12 @@ import Input from '../Input';
 import Select from '../Select';
 import uniqueId from 'lodash.uniqueid';
 
-// From react-table@6.8.6
+// Firefox browser behaves in a different way than other browsers with input fields type change,
+// so we are detecting if user is in Firefox with this workaround
+// https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+const isFirefox = typeof InstallTrigger !== 'undefined';
+
+// From react-table@6.8.6 (with FireFox input field fix)
 // See https://github.com/react-tools/react-table/blob/f55ce620411c619855a2fe2f081407e4f82727b9/src/pagination.js
 
 class Pagination extends PaginationRT {
@@ -57,13 +62,16 @@ class Pagination extends PaginationRT {
                 </label>
                 <Input
                   id={`${this.uniqueId}_pageJump`}
-                  type={'number'}
+                  type={!isFirefox && this.state.page === '' ? 'text' : 'number'}
                   onChange={e => {
-                    const val = e.target.valueAsNumber;
-                    if (isNaN(val)) {
-                      return this.setState({ page: val });
+                    const { value, valueAsNumber } = e.target;
+                    if (isFirefox && isNaN(valueAsNumber)) {
+                      return this.setState({ page: valueAsNumber });
                     }
-                    const page = val - 1;
+                    if (value === '') {
+                      return this.setState({ page: value });
+                    }
+                    const page = value - 1;
                     this.setState({ page: this.getSafePage(page) });
                   }}
                   value={this.state.page === '' ? '' : this.state.page + 1}
